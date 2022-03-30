@@ -1,5 +1,9 @@
 .container {
+  display: flex;
   padding: 0 2rem;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 .main {
