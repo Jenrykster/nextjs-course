@@ -10,7 +10,7 @@ import {
   getEventById,
   getFeaturedEvents,
 } from '../../helpers/api-util';
-
+import Head from 'next/head';
 function EventDetailPage(props) {
   console.log(props);
   const event = props.selectedEvent;
@@ -25,6 +25,10 @@ function EventDetailPage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
@@ -59,6 +63,6 @@ export async function getStaticPaths() {
   const paths = events.map((event) => ({ params: { eventId: event.id } }));
   return {
     paths: [{ params: { eventId: 'e1' } }],
-    fallback: true,
+    fallback: 'blocking',
   };
 }
