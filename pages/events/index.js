@@ -8,7 +8,7 @@ import EventsSearch from '../../components/events/events-search';
 function AllEventsPage(props) {
   const router = useRouter();
   const { events } = props;
-
+  console.log(events);
   function findEventsHandler(year, month) {
     const fullPath = `/events/${year}/${month}`;
 
@@ -23,14 +23,14 @@ function AllEventsPage(props) {
   );
 }
 
-export async function getStataicProps() {
+export async function getStaticProps() {
   const events = await getAllEvents();
 
   return {
     props: {
       events: events,
     },
-    revalidade: 60,
+    revalidate: 60,
   };
 }
 
