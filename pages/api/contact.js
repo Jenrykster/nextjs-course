@@ -23,12 +23,15 @@ async function handler(req, res) {
     };
 
     let client;
+
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.fbldd.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
+    console.log('CONNECT STRING: ', connectionString);
     try {
-      client = await MongoClient.connect(
-        'mongodb+srv://ademir:ademir@react-class.fbldd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-      );
+      client = await MongoClient.connect(connectionString);
+      console.log(client);
     } catch (error) {
-      res.status(500).json({ message: 'Error' });
+      console.log(error);
+      res.status(500).json({ message: 'Error while creating client' });
     }
 
     const db = client.db();
